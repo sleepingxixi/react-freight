@@ -1,14 +1,14 @@
 import axios, { AxiosError } from 'axios';
 import { message } from 'antd';
 import { hideLoading, showLoading } from './loading';
-// import storage from './storage'
+import storage from './storage';
 import env from '@/config';
-// import { Result } from '@/types/api'
+import { Result } from '@/types/api';
 
 console.log(import.meta.env);
 // 创建实例
 const instance = axios.create({
-	baseURL: import.meta.env.VITE_BASE_API,
+	// baseURL: import.meta.env.VITE_BASE_API,
 	timeout: 10000,
 	timeoutErrorMessage: '请求超时，请稍后再试',
 	withCredentials: true,
@@ -20,14 +20,8 @@ const instance = axios.create({
 // 请求拦截器
 instance.interceptors.request.use(
 	config => {
-		showLoading();
-		// if (config.showLoading) showLoading();
-		// const token = storage.get('token');
-		// if (token) {
-		// 	config.headers.Authorization = 'Bearer ' + token;
-		// }
-
-		const token = localStorage.getItem('token');
+		if (config.showLoading) showLoading();
+		const token = storage.get('token');
 		if (token) {
 			// config.headers.Authorization = 'Bearer ' + token;
 			config.headers.Authorization = 'Token:: ' + token;
@@ -37,7 +31,6 @@ instance.interceptors.request.use(
 		// } else {
 		// 	config.baseURL = import.meta.env.VITE_BASE_API; // 真实数据
 		// }
-		console.log(env);
 		if (env.mock) {
 			config.baseURL = env.mockApi; // mock数据
 		} else {
@@ -55,22 +48,22 @@ instance.interceptors.request.use(
 // 响应拦截器
 instance.interceptors.response.use(
 	response => {
-		const data = response.data;
+		const data: Result = response.data;
 		hideLoading();
 		if (response.config.responseType === 'blob') return response;
 		if (data.code === 50001) {
 			message.error(data.msg);
 			// storage.remove('token')
+			// 如果登录失效了，就通过这样的方式跳转到登录页面，并携带返回页面的参数
 			location.href = '/login?callback=' + encodeURIComponent(location.href);
 		} else if (data.code != 0) {
 			message.error(data.msg);
-			return Promise.reject(data);
-			// if (response.config.showError === false) {
-			// 	return Promise.resolve(data);
-			// } else {
-			// 	message.error(data.msg);
-			// 	return Promise.reject(data);
-			// }
+			if (response.config.showError === false) {
+				return Promise.resolve(data);
+			} else {
+				message.error(data.msg);
+				return Promise.reject(data);
+			}
 		}
 		return data.data;
 	},
@@ -87,18 +80,12 @@ interface IConfig {
 }
 
 export default {
-	get(url: string, params?: any) {
-		return instance.get(url, { params });
+	get<T>(url: string, params?: object, options: IConfig = { showLoading: true, showError: true }): Promise<T> {
+		return instance.get(url, { params, ...options });
 	},
-	post(url: string, params: any) {
-		return instance.post(url, params);
+	post<T>(url: string, params?: object, options: IConfig = { showLoading: true, showError: true }): Promise<T> {
+		return instance.post(url, params, options);
 	}
-	// get<T>(url: string, params?: object, options: IConfig = { showLoading: true, showError: true }): Promise<T> {
-	// 	return instance.get(url, { params, ...options });
-	// }
-	// post<T>(url: string, params?: object, options: IConfig = { showLoading: true, showError: true }): Promise<T> {
-	// 	return instance.post(url, params, options);
-	// }
 	// downloadFile(url: string, data: any, fileName = 'fileName.xlsx') {
 	// 	instance({
 	// 		url,

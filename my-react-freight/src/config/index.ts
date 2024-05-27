@@ -18,7 +18,7 @@ const config = {
 		baseApi: '/api',
 		uploadApi: 'http://api-driver-dev.marsview.cc',
 		cdn: 'http://xxx.aliyun.com',
-		mock: true,
+		mock: false,
 		// mockApi: 'https://www.fastmock.site/mock/5841b82d5672783b6fd62bb2a06aeb1f/api'
 		mockApi: 'https://www.fastmock.site/mock/af8cca2e4a9855b513ab85cb704d7c1e/api'
 	},

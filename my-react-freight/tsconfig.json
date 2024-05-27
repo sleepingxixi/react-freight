@@ -2,6 +2,8 @@
   "compilerOptions": {
     "target": "ESNext",
     "useDefineForClassFields": true,
+    // 模块是用“export =”声明的，当 allowSyntheticDefaultImports 设置为 true 时，才可以写默认导入。
+    "allowSyntheticDefaultImports": true,
     "lib": [
       "ESNext",
       "DOM",
@@ -26,10 +28,16 @@
       "@/*": [
         "src/*"
       ]
-    }
+    },
+    "plugins": [
+      {
+        "name": "typescript-plugin-css-modules"
+      }
+    ]
   },
   "include": [
-    "src"
+    "src",
+    "typings.d.ts"
   ],
   "references": [
     {

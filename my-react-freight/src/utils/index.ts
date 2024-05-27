@@ -1,3 +1,15 @@
+// 延迟几秒后执行
+export const delay = (fn: any, time: number, ...args: any) => {
+	return new Promise(resolve => {
+		return setTimeout(() => {
+			Promise.resolve(fn(...args)).then(resolve);
+		}, time);
+	});
+};
+
+// 等待几秒
+export const sleep = (time: number) => new Promise(resolve => setTimeout(resolve, time));
+
 // 格式化金额
 export const formatMoney = (num: number | string) => {
 	const newNum = parseFloat(num.toString());

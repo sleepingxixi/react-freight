@@ -8,7 +8,7 @@ export default defineConfig({
 		host: 'localhost',
 		port: 8080,
 		proxy: {
-			'/api': 'https://www.fastmock.site/mock/af8cca2e4a9855b513ab85cb704d7c1e/api'
+			'/api': 'http://api-driver-dev.marsview.cc'
 		}
 	},
 	resolve: {

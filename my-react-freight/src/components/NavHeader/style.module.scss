@@ -1,0 +1,16 @@
+.header {
+	height: 60px;
+	background-color: white;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 20px;
+}
+.left {
+	display: flex;
+	align-items: center;
+}
+.right {
+	display: flex;
+	align-items: center;
+}

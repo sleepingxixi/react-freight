@@ -3,15 +3,19 @@ import Welcome from '@/pages';
 import NotFound from '@/pages/errorPages/NotFound';
 import ForbiddenPage from '@/pages/errorPages/Forbidden';
 import Login from '@/pages/Login';
+import AppLayout from '@/layout/index';
 
 const routers: RouteObject[] = [
 	{
 		path: '/',
-		element: <Welcome />,
+		element: <Navigate to='/welcome' />
+	},
+	{
+		element: <AppLayout />,
 		children: [
 			{
-				path: 'vite',
-				element: <div>vite</div>
+				path: '/welcome',
+				element: <Welcome />
 			}
 		]
 	},
