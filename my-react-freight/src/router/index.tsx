@@ -1,22 +1,40 @@
-import { createBrowserRouter, Navigate, RouteObject } from 'react-router-dom';
-import Welcome from '../pages';
-import NotFound from '../pages/errorPages/NotFound';
-import ForbiddenPage from '../pages/errorPages/Forbidden';
+import { Navigate, RouteObject, useRoutes } from 'react-router-dom';
+import Welcome from '@/pages';
+import NotFound from '@/pages/errorPages/NotFound';
+import ForbiddenPage from '@/pages/errorPages/Forbidden';
+import Login from '@/pages/Login';
 
-const router: RouteObject[] = [
+const routers: RouteObject[] = [
 	{
 		path: '/',
 		element: <Welcome />,
 		children: [
 			{
 				path: 'vite',
-				element: <div>vite</div>,
-			},
-		],
+				element: <div>vite</div>
+			}
+		]
 	},
-	{ path: '*', element: <Navigate to='/404' /> },
-	{ path: '/404', element: <NotFound /> },
-	{ path: '/403', element: <ForbiddenPage /> },
+	{
+		path: '/login',
+		element: <Login />
+	},
+	{
+		path: '*',
+		element: <Navigate to='/404' />
+	},
+	{
+		path: '/404',
+		element: <NotFound />
+	},
+	{
+		path: '/403',
+		element: <ForbiddenPage />
+	}
 ];
 
-export default createBrowserRouter(router);
+// export default createBrowserRouter(routers);
+
+export default function () {
+	return useRoutes(routers);
+}
