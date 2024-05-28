@@ -1,6 +1,6 @@
 // 延迟几秒后执行
-export const delay = (fn: any, time: number, ...args: any) => {
-	return new Promise(resolve => {
+export const delay = <T>(fn: any, time: number, ...args: any) => {
+	return new Promise<T>(resolve => {
 		return setTimeout(() => {
 			Promise.resolve(fn(...args)).then(resolve);
 		}, time);

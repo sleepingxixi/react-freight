@@ -1,5 +1,5 @@
 import { Navigate, RouteObject, useRoutes } from 'react-router-dom';
-import Welcome from '@/pages';
+import Welcome from '@/pages/Welcome';
 import NotFound from '@/pages/errorPages/NotFound';
 import ForbiddenPage from '@/pages/errorPages/Forbidden';
 import Login from '@/pages/Login';

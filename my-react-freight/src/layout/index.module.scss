@@ -1,0 +1,10 @@
+.content {
+	background-color: #f5f5f5;
+	padding: 20px;
+	height: calc(100vh - 60px);
+	overflow: auto;
+	.wrapper {
+		background-color: white;
+		border-radius: 6px;
+	}
+}

@@ -11,7 +11,6 @@ module.exports = {
 		'@typescript-eslint/no-explicit-any': 'warn',
 		// 不对命名空间做限制
 		'@typescript-eslint/no-namespace': 'off',
-		'@typescript-eslint/no-unused-vars': 'warn',
-		allowSyntheticDefaultImports: true
+		'@typescript-eslint/no-unused-vars': 'warn'
 	}
 };

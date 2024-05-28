@@ -57,7 +57,6 @@ instance.interceptors.response.use(
 			// 如果登录失效了，就通过这样的方式跳转到登录页面，并携带返回页面的参数
 			location.href = '/login?callback=' + encodeURIComponent(location.href);
 		} else if (data.code != 0) {
-			message.error(data.msg);
 			if (response.config.showError === false) {
 				return Promise.resolve(data);
 			} else {

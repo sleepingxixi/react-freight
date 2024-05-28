@@ -1,0 +1,19 @@
+.footer {
+	color: rgb(128, 126, 126);
+	font-size: 14px;
+	text-align: center;
+	height: 50px;
+	padding: 10px;
+	.desc {
+		margin-bottom: 6px;
+		:global(a) {
+			color: rgb(128, 126, 126);
+			&:hover {
+				color: #fa8c16;
+			}
+		}
+		.gutter {
+			margin: 0 10px;
+		}
+	}
+}
