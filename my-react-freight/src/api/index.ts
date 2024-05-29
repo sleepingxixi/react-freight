@@ -1,5 +1,5 @@
 // import request from '@/utils/request';
-import { Login, User } from '@/types/api';
+import { Login, User, Report } from '@/types/api';
 import { delay } from '@/utils';
 
 export default {
@@ -10,7 +10,7 @@ export default {
 		const mockRequest = () => {
 			return { code: 0, data: '123' };
 		};
-		return delay(mockRequest, 3000);
+		return delay(mockRequest, 1000);
 	},
 
 	getUserInfo(): Promise<User.UserInfo> {
@@ -23,7 +23,7 @@ export default {
 				userEmail: 'simlePing@qq.com',
 				mobile: '18100001111',
 				deptId: '',
-				deptName: '',
+				deptName: '大前端',
 				job: '前端工程师',
 				state: 1,
 				role: 2,
@@ -31,6 +31,18 @@ export default {
 				roleList: '655dbedb11c02c8597dce76f'
 			};
 		};
-		return delay(mockRequest, 3000);
+		return delay(mockRequest, 1000);
+	},
+
+	getReportData(): Promise<Report.ReportData> {
+		const mockRequest = () => {
+			return {
+				driverCount: 278600,
+				totalMoney: 3984200,
+				orderCount: 1306000,
+				cityNum: 80
+			};
+		};
+		return delay(mockRequest, 1000);
 	}
 };

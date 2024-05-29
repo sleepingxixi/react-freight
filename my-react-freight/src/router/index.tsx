@@ -4,6 +4,7 @@ import NotFound from '@/pages/errorPages/NotFound';
 import ForbiddenPage from '@/pages/errorPages/Forbidden';
 import Login from '@/pages/Login';
 import AppLayout from '@/layout/index';
+import DashBoard from '@/pages/Dashboard';
 
 const routers: RouteObject[] = [
 	{
@@ -16,6 +17,10 @@ const routers: RouteObject[] = [
 			{
 				path: '/welcome',
 				element: <Welcome />
+			},
+			{
+				path: '/dashboard',
+				element: <DashBoard />
 			}
 		]
 	},

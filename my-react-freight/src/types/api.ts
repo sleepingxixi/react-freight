@@ -37,3 +37,12 @@ export namespace User {
 		roleList?: string;
 	}
 }
+
+export namespace Report {
+	export interface ReportData {
+		driverCount?: number;
+		totalMoney?: number;
+		orderCount?: number;
+		cityNum?: number;
+	}
+}

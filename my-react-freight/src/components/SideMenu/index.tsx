@@ -8,7 +8,14 @@ type MenuItem = Required<MenuProps>['items'][number];
 const SideMenu = () => {
 	const navigate = useNavigate();
 	const items: MenuItem[] = [
-		{ key: '1', icon: <PieChartOutlined />, label: '工作台' },
+		{
+			key: '1',
+			icon: <PieChartOutlined />,
+			label: '工作台',
+			onClick: () => {
+				navigate('/dashboard');
+			}
+		},
 		{
 			key: '2',
 			label: '系统管理',

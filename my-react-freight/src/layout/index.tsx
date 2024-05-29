@@ -29,9 +29,7 @@ const AppLayout = () => {
 				<Layout>
 					<NavHeader />
 					<Content className={styles.content}>
-						<div className={styles.wrapper}>
-							<Outlet />
-						</div>
+						<Outlet />
 						<NavFooter />
 					</Content>
 				</Layout>

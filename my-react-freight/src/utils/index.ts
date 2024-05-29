@@ -11,12 +11,18 @@ export const delay = <T>(fn: any, time: number, ...args: any) => {
 export const sleep = (time: number) => new Promise(resolve => setTimeout(resolve, time));
 
 // 格式化金额
-export const formatMoney = (num: number | string) => {
+export const formatMoney = (num?: number | string) => {
+	if (!num) {
+		return 0;
+	}
 	const newNum = parseFloat(num.toString());
 	return newNum.toLocaleString('zh-CN', { style: 'currency', currency: 'CNY' });
 };
 
-export const formatNum = (num: number | string) => {
+export const formatNum = (num?: number | string) => {
+	if (!num) {
+		return 0;
+	}
 	const newNum = num.toString();
 	if (newNum.indexOf('.') > -1) {
 		return newNum.replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
