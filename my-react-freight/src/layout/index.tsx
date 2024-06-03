@@ -8,6 +8,7 @@ import { useEffect } from 'react';
 import Api from '@/api';
 import { User } from '@/types/api';
 import { useUserInfo } from '@/stores';
+import TabsFC from '@/components/TabsFC';
 
 const { Content, Sider } = Layout;
 
@@ -22,18 +23,23 @@ const AppLayout = () => {
 	};
 	return (
 		<Watermark content='smilePing'>
-			<Layout style={{ minHeight: '100vh' }}>
-				<Sider width='256'>
-					<SideMenu />
-				</Sider>
-				<Layout>
-					<NavHeader />
-					<Content className={styles.content}>
-						<Outlet />
-						<NavFooter />
-					</Content>
+			{state.userInfo?._id ? (
+				<Layout style={{ minHeight: '100vh' }}>
+					<Sider width='256'>
+						<SideMenu />
+					</Sider>
+					<Layout>
+						<NavHeader />
+						<TabsFC />
+						<Content className={styles.content}>
+							<div className={styles.wrapper}>
+								<Outlet />
+							</div>
+							<NavFooter />
+						</Content>
+					</Layout>
 				</Layout>
-			</Layout>
+			) : null}
 		</Watermark>
 	);
 };

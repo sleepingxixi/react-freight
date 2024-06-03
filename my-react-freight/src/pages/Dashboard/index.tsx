@@ -7,6 +7,7 @@ import Api from '@/api';
 import { Report } from '@/types/api';
 import { formatMoney, formatNum } from '@/utils';
 import { useCharts } from '@/hooks/useCharts';
+import { convertLegacyProps } from 'antd/es/button';
 
 // 指定图表的配置项和数据
 const orderOption = {
@@ -53,7 +54,7 @@ const cityOption = {
 	},
 	series: [
 		{
-			name: '分布占比',
+			name: '城市分布',
 			type: 'pie',
 			radius: '50%',
 			data: [
@@ -86,7 +87,7 @@ const ageOption = {
 	},
 	series: [
 		{
-			name: 'Nightingale Chart',
+			name: '年龄分布',
 			type: 'pie',
 			radius: [20, 100],
 			center: ['50%', '50%'],
@@ -148,7 +149,15 @@ const DashBoard = () => {
 		const data = await Api.getReportData();
 		setReport(data);
 	};
-	const showLineChart = () => {
+
+	// 获取折线图数据，只有这个使用api的方式，其他的都是静态的数据
+	const showLineChart = async () => {
+		if (!lineChartInstance) return;
+		console.log('刷新');
+		const data = await Api.getLineData();
+		orderOption.xAxis.data = data.label;
+		orderOption.series[0].data = data.order;
+		orderOption.series[1].data = data.money;
 		lineChartInstance?.setOption(orderOption);
 	};
 	const showCityChart = () => {
@@ -214,7 +223,15 @@ const DashBoard = () => {
 					<div className={styles.data}>{formatNum(report?.cityNum)}座</div>
 				</div>
 			</div>
-			<Card title='订单流水走势图' style={{ marginTop: '20px' }} extra={<Button type='primary'>刷新</Button>}>
+			<Card
+				title='订单流水走势图'
+				style={{ marginTop: '20px' }}
+				extra={
+					<Button type='primary' onClick={showLineChart}>
+						刷新
+					</Button>
+				}
+			>
 				<div ref={lineChartRef} style={{ height: '300px' }}></div>
 			</Card>
 			<Card title='司机分布图' style={{ marginTop: '20px' }} extra={<Button type='primary'>刷新</Button>}>

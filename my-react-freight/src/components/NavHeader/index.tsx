@@ -4,17 +4,22 @@ import { ItemType } from 'antd/es/breadcrumb/Breadcrumb';
 import styles from './style.module.scss';
 import { useUserInfo } from '@/stores';
 import storage from '@/utils/storage';
+import NewBreadCrumb from '../NewBreadCrumb/index';
+import { useEffect } from 'react';
 
 const NavHeader = () => {
 	const state = useUserInfo();
-	const breadcrumbItem: ItemType[] = [
-		{
-			title: '首页'
-		},
-		{
-			title: '工作台'
-		}
-	];
+	// const breadcrumbItem: ItemType[] = [
+	// 	{
+	// 		title: '首页'
+	// 	},
+	// 	{
+	// 		title: '工作台'
+	// 	}
+	// ];
+	useEffect(() => {
+		handleSwitch(state.isDark);
+	}, []);
 	const items: MenuProps['items'] = [
 		{
 			label: `邮箱：${state.userInfo?.userEmail}`,
@@ -35,15 +40,33 @@ const NavHeader = () => {
 			location.href = '/login?callback=' + encodeURIComponent(location.href);
 		}
 	};
-
+	const handleSwitch = (isDark: boolean) => {
+		if (isDark) {
+			document.documentElement.dataset.theme = 'dark';
+			document.documentElement.classList.add('dark');
+		} else {
+			document.documentElement.dataset.theme = 'light';
+			document.documentElement.classList.remove('dark');
+		}
+		storage.set('isDark', isDark);
+		state.updateTheme(isDark);
+	};
 	return (
 		<div className={styles.header}>
 			<div className={styles.left}>
 				<MenuFoldOutlined style={{ marginRight: 10 }} />
-				<Breadcrumb items={breadcrumbItem} />
+				<NewBreadCrumb />
 			</div>
 			<div className={styles.right}>
-				<Switch checkedChildren='暗黑' unCheckedChildren='默认' style={{ marginRight: 10 }} />
+				<Switch
+					checked={state.isDark}
+					checkedChildren='暗黑'
+					unCheckedChildren='默认'
+					style={{ marginRight: 10 }}
+					onChange={(checked: boolean) => {
+						handleSwitch(checked);
+					}}
+				/>
 				<Dropdown menu={{ items, onClick }} trigger={['click']}>
 					<div onClick={e => e.preventDefault()}>{state.userInfo?.userName}</div>
 				</Dropdown>

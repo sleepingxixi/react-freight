@@ -4,4 +4,7 @@
 	height: calc(100vh - 60px);
 	width: calc(100vw - 256px);
 	overflow: auto;
+	.wrapper {
+		min-height: calc(100vh - 170px);
+	}
 }

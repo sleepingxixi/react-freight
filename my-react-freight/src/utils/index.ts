@@ -1,3 +1,5 @@
+import { Menu } from '@/types/api';
+
 // 延迟几秒后执行
 export const delay = <T>(fn: any, time: number, ...args: any) => {
 	return new Promise<T>(resolve => {
@@ -68,4 +70,40 @@ export const formatDate = (date?: Date | string, rule?: string) => {
 		// fmt = fmt.replace(new RegExp(`(${k})`), ('00' + val).substring(val.length))
 	}
 	return fmt;
+};
+
+// 获取页面路径
+export const getMenuPath = (list: Menu.MenuItem[]): string[] => {
+	return list.reduce((result: string[], item: Menu.MenuItem) => {
+		return result.concat(Array.isArray(item.children) && !item.buttons ? getMenuPath(item.children) : item.path + '');
+	}, []);
+};
+
+// 递归查找树的路径
+export const findTreeNode = (tree: Menu.MenuItem[], pathName: string, path: string[]): string[] => {
+	if (!tree) return [];
+	for (const data of tree) {
+		path.push(data.menuName);
+		if (data.path === pathName) return path;
+		if (data.children?.length) {
+			const list = findTreeNode(data.children, pathName, path);
+			if (list?.length) return list;
+		}
+		path.pop();
+	}
+	return [];
+};
+
+// 递归获取路由对象
+export const searchRoute: any = (path: string, routes: any = []) => {
+	for (const item of routes) {
+		if (item.path == path) {
+			return item;
+		}
+		if (item.children) {
+			const res = searchRoute(path, item.children);
+			if (res) return res;
+		}
+	}
+	return '';
 };

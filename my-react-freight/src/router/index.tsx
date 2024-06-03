@@ -1,10 +1,13 @@
-import { Navigate, RouteObject, useRoutes } from 'react-router-dom';
-import Welcome from '@/pages/Welcome';
+import { Navigate, RouteObject, createBrowserRouter, useRoutes } from 'react-router-dom';
 import NotFound from '@/pages/errorPages/NotFound';
 import ForbiddenPage from '@/pages/errorPages/Forbidden';
-import Login from '@/pages/Login';
+import Login from '@/pages/login';
 import AppLayout from '@/layout/index';
-import DashBoard from '@/pages/Dashboard';
+import User from '@/pages/system/user';
+
+import AuthLoader from './AuthLoader';
+import React from 'react';
+import { lazyLoad } from './LazyLoad';
 
 const routers: RouteObject[] = [
 	{
@@ -12,15 +15,26 @@ const routers: RouteObject[] = [
 		element: <Navigate to='/welcome' />
 	},
 	{
+		id: 'layout',
 		element: <AppLayout />,
+		loader: AuthLoader,
 		children: [
 			{
 				path: '/welcome',
-				element: <Welcome />
+				element: lazyLoad(React.lazy(() => import('@/pages/welcome')))
 			},
 			{
 				path: '/dashboard',
-				element: <DashBoard />
+				element: lazyLoad(React.lazy(() => import('@/pages/dashboard')))
+			},
+			{
+				path: '/userlist',
+				// element: <User />
+				element: lazyLoad(React.lazy(() => import('@/pages/system/user/indexHook')))
+			},
+			{
+				path: '/deptList',
+				element: lazyLoad(React.lazy(() => import('@/pages/system/dept/index')))
 			}
 		]
 	},
@@ -44,6 +58,4 @@ const routers: RouteObject[] = [
 
 // export default createBrowserRouter(routers);
 
-export default function () {
-	return useRoutes(routers);
-}
+export default createBrowserRouter(routers);
