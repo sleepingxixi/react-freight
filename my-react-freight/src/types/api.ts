@@ -1,4 +1,4 @@
-import DepartmentList from '@/pages/system/dept';
+// import DepartmentList from '@/pages/system/dept';
 
 type NoRequired<T> = {
 	[property in keyof T]?: T[property];

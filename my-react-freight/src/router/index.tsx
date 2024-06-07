@@ -1,9 +1,9 @@
-import { Navigate, RouteObject, createBrowserRouter, useRoutes } from 'react-router-dom';
+import { Navigate, RouteObject, createBrowserRouter } from 'react-router-dom';
 import NotFound from '@/pages/errorPages/NotFound';
 import ForbiddenPage from '@/pages/errorPages/Forbidden';
 import Login from '@/pages/login';
 import AppLayout from '@/layout/index';
-import User from '@/pages/system/user';
+// import User from '@/pages/system/user';
 
 import AuthLoader from './AuthLoader';
 import React from 'react';

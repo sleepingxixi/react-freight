@@ -7,7 +7,7 @@ import Api from '@/api';
 import { Report } from '@/types/api';
 import { formatMoney, formatNum } from '@/utils';
 import { useCharts } from '@/hooks/useCharts';
-import { convertLegacyProps } from 'antd/es/button';
+// import { convertLegacyProps } from 'antd/es/button';
 
 // 指定图表的配置项和数据
 const orderOption = {

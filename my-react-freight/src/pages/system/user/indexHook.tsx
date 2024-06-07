@@ -3,7 +3,7 @@
  */
 import { Button, Form, Input, Modal, Select, Space, Table, TableColumnsType, message } from 'antd';
 import { User } from '@/types/api';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import Api from '@/api/index';
 import { formatDate } from '@/utils';
 import CreateUserModal from './createUserModal';
@@ -20,15 +20,15 @@ const UserListHook = () => {
 	const userRef = useRef<{
 		open: (type: IAction, data?: User.UserList) => void;
 	}>();
-	const [listData, setListData] = useState<User.UserList[]>();
+	// const [listData, setListData] = useState<User.UserList[]>();
 	// 设置已经勾选的项
 	const [selectIds, setSelectIds] = useState<number[]>([]);
 	// 设置分页字段
-	const [pagination, setPagination] = useState<{ current?: number; pageSize?: number; total?: number }>({
-		current: 1,
-		pageSize: 10,
-		total: 0
-	});
+	// const [pagination, setPagination] = useState<{ current?: number; pageSize?: number; total?: number }>({
+	// 	current: 1,
+	// 	pageSize: 10,
+	// 	total: 0
+	// });
 	const columns: TableColumnsType<User.UserList> = [
 		{
 			title: '用户ID',
@@ -132,7 +132,7 @@ const UserListHook = () => {
 			list: res.list
 		}));
 	};
-	const { tableProps, search, params } = useAntdTable(getTableData, {
+	const { tableProps, search } = useAntdTable(getTableData, {
 		defaultPageSize: 10,
 
 		form
@@ -168,7 +168,7 @@ const UserListHook = () => {
 			cancelText: '取消',
 			onOk: () => {
 				// deleteUser(data, event);
-				return new Promise((resolve, reject) => {
+				return new Promise(resolve => {
 					resolve(deleteUser(data));
 				});
 			}
@@ -193,7 +193,7 @@ const UserListHook = () => {
 			okText: '确认',
 			cancelText: '取消',
 			onOk: () => {
-				return new Promise((resolve, reject) => {
+				return new Promise(resolve => {
 					resolve(batchDeleteUser());
 				});
 			}

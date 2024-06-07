@@ -1,12 +1,13 @@
 // import request from '@/utils/request';
-import { Login, User, Report, Dept, Menu } from '@/types/api';
+import { User, Report, Dept, Menu } from '@/types/api';
 import { delay } from '@/utils';
 
 export default {
-	login(params: Login.params) {
-		// return request.post('/users/login', params, { showLoading: false });
-		// return request.post('/users/login', params);
-		// 设置假数据
+	// login(params: Login.params) {
+	// return request.post('/users/login', params, { showLoading: false });
+	// return request.post('/users/login', params);
+	// 设置假数据
+	login() {
 		const mockRequest = () => {
 			return { code: 0, data: '123' };
 		};

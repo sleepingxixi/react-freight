@@ -94,7 +94,7 @@ const DepartmentList = () => {
 			list: res.list
 		}));
 	};
-	const { tableProps, search, params } = useAntdTable(getTableData, {
+	const { tableProps, search } = useAntdTable(getTableData, {
 		defaultPageSize: 10,
 		form
 	});
@@ -114,6 +114,7 @@ const DepartmentList = () => {
 		ref.current?.open('edit', data);
 	};
 	const handleDelete = (data?: Dept.DeptListData) => {
+		console.log(data);
 		modal.confirm({
 			okText: '确定',
 			cancelText: '取消',

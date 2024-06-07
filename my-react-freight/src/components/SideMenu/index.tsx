@@ -4,6 +4,7 @@ import { Menu, MenuProps } from 'antd';
 import styles from './index.module.scss';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import logoUrl from '@/assets/imgs/logo.png';
 
 // type MenuItem = Required<MenuProps>['items'][number];
 type MenuItem = { key: string; icon?: React.ReactNode; label?: string; children?: MenuItem[] };
@@ -72,7 +73,7 @@ const SideMenu = () => {
 	return (
 		<div style={{ width: 256 }}>
 			<div className={styles['logo-view']} onClick={handleLogo}>
-				<img src='/public/imgs/logo.png' alt='图标' className={styles.logo} />
+				<img src={logoUrl} alt='图标' className={styles.logo} />
 				<div>平平货运</div>
 			</div>
 

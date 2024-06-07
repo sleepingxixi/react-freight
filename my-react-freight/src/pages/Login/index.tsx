@@ -4,17 +4,18 @@ import Api from '@/api/index';
 import storage from '@/utils/storage';
 import { Login } from '@/types/api';
 import { useState } from 'react';
-import { useUserInfo } from '@/stores';
+// import { useUserInfo } from '@/stores';
 const LoginFC = () => {
-	const { userInfo } = useUserInfo(state => ({
-		userInfo: state.userInfo
-	}));
+	// const { userInfo } = useUserInfo(state => ({
+	// 	userInfo: state.userInfo
+	// }));
 	const [loading, setLoading] = useState(false);
 	const onFinish = async (values: Login.params) => {
 		try {
 			setLoading(true);
 			// 请求接口提交信息
-			const data: any = await Api.login(values);
+			console.log(values);
+			const data: any = await Api.login();
 			setLoading(false);
 			if (data.code !== 0) {
 				return message.error('登录失败');
@@ -31,7 +32,6 @@ const LoginFC = () => {
 	};
 	return (
 		<div className={styles.loginContainer}>
-			用户名：{userInfo.userName}1
 			<div className={styles.loginWrapper}>
 				<div className={styles.title}>登录页面</div>
 				<Form
