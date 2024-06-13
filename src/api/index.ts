@@ -360,7 +360,7 @@ export default {
 						_id: '655db45ff10762608048caec',
 						menuType: 1,
 						menuName: '工作台',
-						path: '/dashboard',
+						path: '/react-freight/dashboard',
 						icon: 'DesktopOutlined',
 						orderBy: 0,
 						menuState: 1,
@@ -417,7 +417,7 @@ export default {
 							{
 								_id: '655db4a4f10762608048caf4',
 								menuType: 1,
-								path: '/userlist',
+								path: '/react-freight/userlist',
 								menuName: '人员管理',
 								menuCode: 'home@query',
 								orderBy: 0,
@@ -431,7 +431,7 @@ export default {
 							{
 								_id: '655db4a4f10762608048caf4',
 								menuType: 1,
-								path: '/deptList',
+								path: '/react-freight/deptList',
 								menuName: '部门管理',
 								menuCode: 'home@query',
 								orderBy: 0,

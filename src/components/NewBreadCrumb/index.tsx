@@ -5,18 +5,18 @@ import { ReactNode, useEffect, useState } from 'react';
 import { useLocation, useRouteLoaderData } from 'react-router-dom';
 
 const NewBreadCrumb = () => {
-	const { pathname } = useLocation();
-	const [breadList, setBreadList] = useState<(string | ReactNode)[]>([]);
+  const { pathname } = useLocation();
+  const [breadList, setBreadList] = useState<(string | ReactNode)[]>([]);
 
-	// // 权限判断
-	const data = useRouteLoaderData('layout') as IAuthLoader;
+  // // 权限判断
+  const data = useRouteLoaderData('layout') as IAuthLoader;
 
-	useEffect(() => {
-		const list = findTreeNode(data.menuList, pathname, []);
-		setBreadList([<a href='/welcome'> 首页</a>, ...list]);
-	}, [pathname]);
+  useEffect(() => {
+    const list = findTreeNode(data.menuList, pathname, []);
+    setBreadList([<a href='/react-freight/welcome'> 首页</a>, ...list]);
+  }, [pathname]);
 
-	return <Breadcrumb items={breadList.map(item => ({ title: item }))} style={{ marginLeft: 10 }} />;
-	// return <Breadcrumb items={[{ title: 'q' }]} style={{ marginLeft: 10 }} />;
+  return <Breadcrumb items={breadList.map(item => ({ title: item }))} style={{ marginLeft: 10 }} />;
+  // return <Breadcrumb items={[{ title: 'q' }]} style={{ marginLeft: 10 }} />;
 };
 export default NewBreadCrumb;

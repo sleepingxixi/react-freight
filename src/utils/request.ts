@@ -55,7 +55,7 @@ instance.interceptors.response.use(
 			message.error(data.msg);
 			// storage.remove('token')
 			// 如果登录失效了，就通过这样的方式跳转到登录页面，并携带返回页面的参数
-			location.href = '/login?callback=' + encodeURIComponent(location.href);
+			location.href = '/react-freight/login?callback=' + encodeURIComponent(location.href);
 		} else if (data.code != 0) {
 			if (response.config.showError === false) {
 				return Promise.resolve(data);
