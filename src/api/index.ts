@@ -12,7 +12,7 @@ export default {
 		if (token === '123') {
 			return { code: 0, data: '' };
 		} else {
-			location.href = '/login?callback=' + encodeURIComponent(location.href);
+			location.href = '/react-freight/login?callback=' + encodeURIComponent(location.href);
 			return { code: 50001, data: '' };
 		}
 	},
