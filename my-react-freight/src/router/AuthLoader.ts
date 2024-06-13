@@ -9,6 +9,7 @@ export interface IAuthLoader {
 }
 
 export default async function AuthLoader() {
+	await Api.checkLogin();
 	const data = await Api.getPermissionList();
 	const menuPathList = getMenuPath(data.menuList);
 	return {

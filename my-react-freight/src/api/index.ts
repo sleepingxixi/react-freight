@@ -1,15 +1,29 @@
 // import request from '@/utils/request';
-import { User, Report, Dept, Menu } from '@/types/api';
+import { User, Report, Dept, Menu, Login } from '@/types/api';
 import { delay } from '@/utils';
+import storage from '@/utils/storage';
 
 export default {
 	// login(params: Login.params) {
 	// return request.post('/users/login', params, { showLoading: false });
 	// return request.post('/users/login', params);
+	checkLogin() {
+		const token = storage.get('token');
+		if (token === '123') {
+			return { code: 0, data: '' };
+		} else {
+			location.href = '/login?callback=' + encodeURIComponent(location.href);
+			return { code: 50001, data: '' };
+		}
+	},
 	// 设置假数据
-	login() {
+	login(params: Login.params) {
 		const mockRequest = () => {
-			return { code: 0, data: '123' };
+			if (params.userName === 'lpTest' && params.userPwd === 'sleeping123') {
+				return { code: 0, data: '123' };
+			} else {
+				return { code: -1 };
+			}
 		};
 		return delay(mockRequest, 1000);
 	},

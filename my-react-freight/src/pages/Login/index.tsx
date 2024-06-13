@@ -15,7 +15,7 @@ const LoginFC = () => {
 			setLoading(true);
 			// 请求接口提交信息
 			console.log(values);
-			const data: any = await Api.login();
+			const data: any = await Api.login(values);
 			setLoading(false);
 			if (data.code !== 0) {
 				return message.error('登录失败');
