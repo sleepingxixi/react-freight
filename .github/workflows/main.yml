@@ -28,8 +28,6 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - name: enter dir
-        run: cd ./my-react-freight
       - name: Checkout
         uses: actions/checkout@v4
       - name: Set up Node
@@ -40,7 +38,7 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Build
-        run: npm run build
+        run: cd ./my-react-freigh && npm run build
       - name: Setup Pages
         uses: actions/configure-pages@v4
       - name: Upload artifact
