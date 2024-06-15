@@ -6,7 +6,7 @@ import legacy from '@vitejs/plugin-legacy';
 // https://vitejs.dev/config/
 export default defineConfig({
 	// // 这里我尝试想部署到https://github.com/sleepingxixi/react-freight，所以这是base
-	base: '/react-freight/',
+	// base: '/react-freight/',
 	server: {
 		host: 'localhost',
 		port: 8080,

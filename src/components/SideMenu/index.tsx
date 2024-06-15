@@ -10,7 +10,7 @@ import logoUrl from '@/assets/imgs/logo.png';
 type MenuItem = { key: string; icon?: React.ReactNode; label?: string; children?: MenuItem[] };
 const items: MenuItem[] = [
   {
-    key: '/react-freight/dashboard',
+    key: '/dashboard',
     icon: <DesktopOutlined />,
     label: '工作台'
   },
@@ -19,10 +19,10 @@ const items: MenuItem[] = [
     label: '系统管理',
     icon: <SettingOutlined />,
     children: [
-      { key: '/react-freight/userlist', label: '人员管理', icon: <TeamOutlined /> },
+      { key: '/userlist', label: '人员管理', icon: <TeamOutlined /> },
       // { key: '6', label: '菜单管理', icon: <MenuOutlined /> },
       // { key: '7', label: '角色管理', icon: <TeamOutlined /> },
-      { key: '/react-freight/deptList', label: '部门管理', icon: <MenuOutlined /> }
+      { key: '/deptList', label: '部门管理', icon: <MenuOutlined /> }
     ]
   }
   // {
@@ -52,14 +52,14 @@ items.map(item => {
 
 const SideMenu = () => {
   const navigate = useNavigate();
-  const [selectMenu, setSelectMenu] = useState<string>('/react-freight/welcome');
+  const [selectMenu, setSelectMenu] = useState<string>('/welcome');
   const { pathname } = useLocation();
   // 通过递归，找出每一个key的所有展开路径，维护一个map
   useEffect(() => {
-    setSelectMenu(pathname || '/react-freight/welcome');
+    setSelectMenu(pathname || '/welcome');
   }, [pathname]);
   const handleLogo = () => {
-    navigate('/react-freight/welcome');
+    navigate('/welcome');
   };
 
   const clickMenu: MenuProps['onClick'] = e => {

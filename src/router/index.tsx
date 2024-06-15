@@ -11,8 +11,8 @@ import { lazyLoad } from './LazyLoad';
 
 const routers: RouteObject[] = [
   {
-    path: '/react-freight/',
-    element: <Navigate to='/react-freight/welcome' />
+    path: '/',
+    element: <Navigate to='/welcome' />
   },
   {
     id: 'layout',
@@ -20,38 +20,38 @@ const routers: RouteObject[] = [
     loader: AuthLoader,
     children: [
       {
-        path: '/react-freight/welcome',
+        path: '/welcome',
         element: lazyLoad(React.lazy(() => import('@/pages/welcome')))
       },
       {
-        path: '/react-freight/dashboard',
+        path: '/dashboard',
         element: lazyLoad(React.lazy(() => import('@/pages/dashboard')))
       },
       {
-        path: '/react-freight/userlist',
+        path: '/userlist',
         // element: <User />
         element: lazyLoad(React.lazy(() => import('@/pages/system/user/indexHook')))
       },
       {
-        path: '/react-freight/deptList',
+        path: '/deptList',
         element: lazyLoad(React.lazy(() => import('@/pages/system/dept/index')))
       }
     ]
   },
   {
-    path: '/react-freight/login',
+    path: '/login',
     element: <Login />
   },
   {
     path: '*',
-    element: <Navigate to='/react-freight/404' />
+    element: <Navigate to='/404' />
   },
   {
-    path: '/react-freight/404',
+    path: '/404',
     element: <NotFound />
   },
   {
-    path: '/react-freight/403',
+    path: '/403',
     element: <ForbiddenPage />
   }
 ];

@@ -12,7 +12,7 @@ export default function TabsFC() {
   const { pathname } = useLocation();
   const [tabsList, setTabsList] = useState<TabsItem[]>([
     {
-      key: '/react-freight/welcome',
+      key: '/welcome',
       label: '首页',
       closable: false
     }
@@ -34,7 +34,7 @@ export default function TabsFC() {
       tabsList.push({
         key: route.path,
         label: route.menuName,
-        closable: pathname !== '/react-freight/welcome'
+        closable: pathname !== '/welcome'
       });
     }
     setTabsList([...tabsList]);

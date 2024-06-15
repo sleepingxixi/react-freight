@@ -8,7 +8,7 @@ const NotFound = () => {
       title='404'
       subTitle='Sorry, the page you visited does not exist.'
       extra={
-        <Link to='/react-freight/'>
+        <Link to='/'>
           <Button type='primary'>返回首页</Button>
         </Link>
       }

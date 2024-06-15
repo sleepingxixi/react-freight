@@ -13,7 +13,7 @@ const NewBreadCrumb = () => {
 
   useEffect(() => {
     const list = findTreeNode(data.menuList, pathname, []);
-    setBreadList([<a href='/react-freight/welcome'> 首页</a>, ...list]);
+    setBreadList([<a href='/welcome'> 首页</a>, ...list]);
   }, [pathname]);
 
   return <Breadcrumb items={breadList.map(item => ({ title: item }))} style={{ marginLeft: 10 }} />;

@@ -37,7 +37,7 @@ const NavHeader = () => {
       // TODO 清除token
       storage.remove('token');
       state.clearInfo();
-      location.href = '/react-freight/login?callback=' + encodeURIComponent(location.href);
+      location.href = '/login?callback=' + encodeURIComponent(location.href);
     }
   };
   const handleSwitch = (isDark: boolean) => {

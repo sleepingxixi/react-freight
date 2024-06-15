@@ -8,7 +8,7 @@ const ForbiddenPage = () => {
       title='403'
       subTitle='Sorry, you are not authorized to access this page.'
       extra={
-        <Link to='/react-freight/'>
+        <Link to='/'>
           <Button type='primary'>返回首页</Button>
         </Link>
       }
