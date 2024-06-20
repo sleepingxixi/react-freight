@@ -10,3 +10,4 @@ interface ImportMetaEnv {
 interface ImportMeta {
 	readonly env: ImportMetaEnv;
 }
+declare const __MY_APP_VERSION__: string

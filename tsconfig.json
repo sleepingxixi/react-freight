@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "target": "ESNext",
+    "module": "ESNext",
     "useDefineForClassFields": true,
     // 模块是用“export =”声明的，当 allowSyntheticDefaultImports 设置为 true 时，才可以写默认导入。
     "allowSyntheticDefaultImports": true,
@@ -9,12 +10,12 @@
       "DOM",
       "DOM.Iterable"
     ],
-    "module": "ESNext",
     "skipLibCheck": true,
     /* Bundler mode */
     "moduleResolution": "node",
     "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
+    // vite是单文件的处理，如果不开启这一项，很可能出现导入的内容找不到
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
@@ -35,14 +36,17 @@
       }
     ]
   },
+  // 告诉ts我们要编译哪些文件夹下的哪些文件
   "include": [
-    "src",
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.tsx",
     "typings.d.ts"
   ],
-  "references": [
-    {
-      // 如果前后端一起的，这里用来指定，如果是后端，可以用下面的这个配置
-      "path": "./tsconfig.node.json"
-    }
-  ]
+  // "references": [
+  //   {
+  //     // 如果前后端一起的，这里用来指定，如果是后端，可以用下面的这个配置
+  //     "path": "./tsconfig.node.json"
+  //   }
+  // ]
 }
