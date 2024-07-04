@@ -12,7 +12,10 @@ const BeforeCheck = (props: { children: React.ReactNode }) => {
   // 版本监控
   const versionCheck = async () => {
     // 开发环境不进行检查
-    if (process.env.NODE_ENV === 'development') return
+    if (process.env.NODE_ENV === 'development') {
+      setHasNewVersion(false);
+      return
+    }
     const response = await axios.get('version.json')
     if (__MY_APP_VERSION__ !== response.data.version) {
       setHasNewVersion(true)

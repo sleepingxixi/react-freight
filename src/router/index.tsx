@@ -23,15 +23,18 @@ const routers: RouteObject[] = [
       {
         path: '/welcome',
         element: <BeforeCheck>{lazyLoad(React.lazy(() => import('@/pages/welcome')))}</BeforeCheck>
+        // element: lazyLoad(React.lazy(() => import('@/pages/welcome')))
       },
       {
         path: '/dashboard',
         element: <BeforeCheck>{lazyLoad(React.lazy(() => import('@/pages/dashboard')))}</BeforeCheck>
+        // element: lazyLoad(React.lazy(() => import('@/pages/dashboard')))
       },
       {
         path: '/userlist',
         // element: <User />
         element: <BeforeCheck>{lazyLoad(React.lazy(() => import('@/pages/system/user/indexHook')))}</BeforeCheck>
+        // element: lazyLoad(React.lazy(() => import('@/pages/system/user/indexHook')))
       },
       {
         path: '/deptList',
