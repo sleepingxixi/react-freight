@@ -1,5 +1,5 @@
 // import request from '@/utils/request';
-import { User, Report, Dept, Menu, Login } from '@/types/api';
+import { User, Report, Dept, Menu, Login, Equipment } from '@/types/api';
 import { delay } from '@/utils';
 import storage from '@/utils/storage';
 import request from '../utils/request';
@@ -37,11 +37,11 @@ export default {
         _id: '655da3bf9d9a408c7dd73212',
         userId: 1000016,
         userName: 'smilePing',
-        userEmail: 'simlePing@qq.com',
-        mobile: '18100001111',
+        userEmail: 'liping.smile@qq.com',
+        mobile: '18101027598',
         deptId: '',
-        deptName: '大前端',
-        job: '前端工程师',
+        deptName: '无业游民',
+        job: '前端开发工程师',
         state: 1,
         role: 2,
         createId: 1000002,
@@ -70,6 +70,25 @@ export default {
         label: ['6月', '7月', '8月', '9月', '10月', '11月', '12月', '1月', '2月', '3月', '4月', '5月'],
         order: [961, 794, 579, 224, 895, 692, 278, 643, 827, 444, 673, 175],
         money: [501, 908, 652, 845, 886, 95, 528, 969, 187, 868, 85, 336]
+      };
+    };
+    return delay(mockRequest, 1000);
+  },
+
+  getWifiListData(): Promise<Equipment.wifiListData> {
+    const mockRequest = () => {
+      return {
+        page: {
+          pageNum: 1,
+          pageSize: 10,
+          total: 10
+        },
+        list: [{
+          name: '1',
+          ssid: '1',
+          password: '1',
+          createTime: '2023-11-22T10:44:25.532Z',
+        }]
       };
     };
     return delay(mockRequest, 1000);
@@ -436,6 +455,36 @@ export default {
                 menuType: 1,
                 path: '/deptList',
                 menuName: '部门管理',
+                menuCode: 'home@query',
+                orderBy: 0,
+                menuState: 1,
+                parentId: '655db45ff10762608048caec',
+                createId: 1000002,
+                createTime: '2023-11-22T07:50:59.931Z',
+                updateTime: '2023-11-22T07:50:59.931Z',
+                __v: 0
+              }
+            ]
+          },
+          {
+            _id: '655db45ff10762608048caec1',
+            menuType: 1,
+            menuName: '设备管理',
+            path: '3',
+            icon: 'DesktopOutlined',
+            orderBy: 0,
+            menuState: 1,
+            parentId: '',
+            createId: 1000002,
+            createTime: '2023-11-22T07:50:59.931Z',
+            updateTime: '2023-11-22T08:27:07.828Z',
+            __v: 0,
+            children: [
+              {
+                _id: '655db4a4f10762608048caf4',
+                menuType: 1,
+                path: '/wifilist',
+                menuName: 'wifi管理',
                 menuCode: 'home@query',
                 orderBy: 0,
                 menuState: 1,

@@ -151,3 +151,19 @@ export namespace Menu {
     _id: string;
   }
 }
+
+export namespace Equipment {
+
+  export interface Wifi {
+    name: string;
+    ssid: string;
+    password: string;
+    createTime: string;
+    updateTime: string;
+  }
+  export interface wifiListData {
+    page: pageParams;
+    list: Wifi[];
+  }
+
+}

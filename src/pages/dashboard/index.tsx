@@ -5,8 +5,10 @@ import * as echarts from 'echarts';
 import { useUserInfo } from '@/stores';
 import Api from '@/api';
 import { Report } from '@/types/api';
-import { formatMoney, formatNum } from '@/utils';
+import { countDay, formatMoney, formatNum } from '@/utils';
 import { useCharts } from '@/hooks/useCharts';
+import 'echarts/extension/bmap/bmap';
+import { option as mapOption, loadBMap } from './map'
 // import { convertLegacyProps } from 'antd/es/button';
 
 // 指定图表的配置项和数据
@@ -54,7 +56,7 @@ const cityOption = {
   },
   series: [
     {
-      name: '城市分布',
+      name: '花费',
       type: 'pie',
       radius: '50%',
       data: [
@@ -134,6 +136,7 @@ const modelOption = {
     }
   ]
 };
+
 const DashBoard = () => {
   const userInfo = useUserInfo(state => state.userInfo);
   const [report, setReport] = useState<Report.ReportData>();
@@ -141,8 +144,11 @@ const DashBoard = () => {
   // 两种方式都可以
   const [lineChartRef, lineChartInstance] = useCharts();
   const [ladaChartRef, ladaChartInstance] = useCharts();
+  // const [mapChartRef, mapChartInstance] = useCharts();
+
   useEffect(() => {
     getReportData();
+    getMapInstance();
   }, []);
 
   const getReportData = async () => {
@@ -150,6 +156,12 @@ const DashBoard = () => {
     console.log('getReportData=', data)
     setReport(data.data);
   };
+
+  const getMapInstance = () => {
+    loadBMap('1Iyy7ldT8m7X4VQ0D0qWl18MUoh2vCAU').then(() => {
+      showMapChart();
+    })
+  }
 
   // 获取折线图数据，只有这个使用api的方式，其他的都是静态的数据
   const showLineChart = async () => {
@@ -172,6 +184,10 @@ const DashBoard = () => {
   const showModelChart = () => {
     ladaChartInstance?.setOption(modelOption);
   };
+  const showMapChart = () => {
+    const mapChartInstance = echarts.init(document.getElementById('mapContainer'));
+    mapChartInstance?.setOption(mapOption);
+  }
   useEffect(() => {
     showLineChart();
     showCityChart();
@@ -208,22 +224,29 @@ const DashBoard = () => {
       </div>
       <div className={styles['show-data']}>
         <div className={styles.card}>
-          <div>司机数量</div>
-          <div className={styles.data}>{formatNum(report?.driverCount)}个</div>
+          <div>离职天数</div>
+          <div className={styles.data}>{countDay(new Date('2023-10-19'), new Date())}天</div>
         </div>
         <div className={styles.card}>
-          <div>总流水</div>
-          <div className={styles.data}>{formatMoney(report?.totalMoney)}元</div>
+          <div>旅游城市</div>
+          <div className={styles.data}>{21}座</div>
         </div>
         <div className={styles.card}>
-          <div>总订单</div>
-          <div className={styles.data}>{formatNum(report?.orderCount)}单</div>
-        </div>
-        <div className={styles.card}>
-          <div>开通城市</div>
-          <div className={styles.data}>{formatNum(report?.cityNum)}座</div>
+          <div>总支出</div>
+          <div className={styles.data}>{formatMoney(20000)}元</div>
         </div>
       </div>
+      <Card
+        title='地图'
+        style={{ marginTop: '20px' }}
+        extra={
+          <Button type='primary' onClick={showLineChart}>
+            刷新
+          </Button>
+        }
+      >
+        <div id="mapContainer" style={{ height: '500px' }}></div>
+      </Card>
       <Card
         title='订单流水走势图'
         style={{ marginTop: '20px' }}
@@ -235,6 +258,7 @@ const DashBoard = () => {
       >
         <div ref={lineChartRef} style={{ height: '300px' }}></div>
       </Card>
+
       <Card title='司机分布图' style={{ marginTop: '20px' }} extra={<Button type='primary'>刷新</Button>}>
         <div style={{ display: 'flex' }}>
           <div id='pieCityChart' style={{ height: '300px', flex: '1' }}></div>

@@ -28,6 +28,11 @@ export default function TabsFC() {
   // 动态设置当前要打开的页面标签
 
   const addTabs = () => {
+    if (pathname === '/welcome') {
+      setTabsList([...tabsList]);
+      setActiveKey(pathname);
+      return;
+    }
     const route = searchRoute(pathname, data.menuList);
     if (!route) return;
     if (!tabsList.find(item => item.key == route.path)) {

@@ -1,4 +1,4 @@
-import { DesktopOutlined, MenuOutlined, SettingOutlined, TeamOutlined } from '@ant-design/icons';
+import { ApiOutlined, DesktopOutlined, MenuOutlined, SettingOutlined, TeamOutlined, WifiOutlined } from '@ant-design/icons';
 // import * as icons from '@ant-design/icons';
 import { Menu, MenuProps } from 'antd';
 import styles from './index.module.scss';
@@ -23,6 +23,14 @@ const items: MenuItem[] = [
       // { key: '6', label: '菜单管理', icon: <MenuOutlined /> },
       // { key: '7', label: '角色管理', icon: <TeamOutlined /> },
       { key: '/deptList', label: '部门管理', icon: <MenuOutlined /> }
+    ]
+  },
+  {
+    key: '3',
+    label: '设备管理',
+    icon: <ApiOutlined />,
+    children: [
+      { key: '/wifilist', label: 'wifi管理', icon: <WifiOutlined /> },
     ]
   }
   // {
@@ -74,7 +82,7 @@ const SideMenu = () => {
     <div style={{ width: 256 }}>
       <div className={styles['logo-view']} onClick={handleLogo}>
         <img src={logoUrl} alt='图标' className={styles.logo} />
-        <div>平平货运</div>
+        <div style={{ letterSpacing: 1 }}>平平大管家</div>
       </div>
 
       <Menu

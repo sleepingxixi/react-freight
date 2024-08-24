@@ -39,6 +39,10 @@ const routers: RouteObject[] = [
       {
         path: '/deptList',
         element: <BeforeCheck>{lazyLoad(React.lazy(() => import('@/pages/system/dept/index')))}</BeforeCheck>
+      },
+      {
+        path: '/wifilist',
+        element: <BeforeCheck>{lazyLoad(React.lazy(() => import('@/pages/equipment/wifi/index')))}</BeforeCheck>
       }
     ]
   },

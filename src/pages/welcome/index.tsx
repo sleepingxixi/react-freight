@@ -15,8 +15,8 @@ const Welcome = () => {
     <div className={styles['welcome-container']}>
       <div className={styles.content}>
         <div className={styles.title}>欢迎体验</div>
-        <div className={styles['sub-title']}>React18通用后台管理系统</div>
-        <div className={styles.desc}>React18+ReactRouter6.0+AntD5.17+Typescript5.0+Vite实现通用后台</div>
+        <div className={styles['sub-title']}>平平大管家后台管理系统</div>
+        {/* <div className={styles.desc}>React18+ReactRouter6.0+AntD5.17+Typescript5.0+Vite</div> */}
       </div>
       <div className={styles.img}></div>
     </div>
