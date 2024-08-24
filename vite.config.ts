@@ -15,7 +15,19 @@ export default defineConfig({
     host: 'localhost',
     port: 8080,
     proxy: {
-      '/api/user': 'http://182.92.195.142:3000'
+      '/api/user': 'http://182.92.195.142:3000',
+      // '/api/user': 'http://localhost:3000',
+      // '/ws': {
+      //   // target: 'ws://192.168.0.66:60601/',这是后端接口地址
+      //   target: 'ws://localhost:4000/',
+      //   changeOrigin: true,
+      //   ws: true
+      // },
+      // "/socket.io/": {
+      //   target: 'ws://localhost:4000',
+      //   // ws: true,
+      //   // rewrite: (path) => path.replace(/^\/socket.io\//, ''),
+      // },
     }
   },
   resolve: {

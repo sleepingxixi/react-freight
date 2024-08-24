@@ -4,13 +4,14 @@
 	"version": "0.0.1",
 	"type": "module",
 	"scripts": {
+		"d": "vite --open",
 		"dev": "tsc --noEmit && vite --open",
 		"build": "tsc && vite build",
 		"build:test": "tsc &&  vite build --mode test",
 		"lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
 		"preview": "vite preview",
-    "build:upload":"tsc && vite build && vite upload",
-    "upload":"source autoUpload.sh"
+		"build:upload": "tsc && vite build && vite upload",
+		"upload": "source autoUpload.sh"
 	},
 	"dependencies": {
 		"@ant-design/icons": "^5.3.7",
@@ -23,6 +24,7 @@
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
 		"react-router-dom": "^6.23.1",
+		"socket.io-client": "^4.7.5",
 		"zustand": "^4.5.2"
 	},
 	"devDependencies": {

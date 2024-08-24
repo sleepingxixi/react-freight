@@ -5,7 +5,7 @@ import storage from './storage';
 import env from '@/config';
 // import { Result } from '@/types/api';
 
-console.log(import.meta.env);
+// console.log(import.meta.env);
 // 创建实例
 const instance = axios.create({
   // baseURL: import.meta.env.VITE_BASE_API,
