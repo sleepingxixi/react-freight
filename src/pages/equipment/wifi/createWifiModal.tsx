@@ -1,8 +1,9 @@
 import { User } from '@/types/api';
 import { IAction, IWifiProp } from '@/types/modal';
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
-import { Form, Input, Modal } from 'antd';
+import { Form, Input, message, Modal } from 'antd';
 import { useImperativeHandle, useState } from 'react';
+import Api from '@/api/index';
 
 
 const CreateWifiModal = (props: IWifiProp) => {
@@ -31,32 +32,36 @@ const CreateWifiModal = (props: IWifiProp) => {
     console.log('提交');
     try {
       await form.validateFields();
+      const submitData = form.getFieldsValue();
       if (action === 'edit') {
-        // TODO调用接口，编辑用户
+        const data = await Api.editWifiData(submitData);
+        if (data.data === true) {
+          message.success("更新成功");
+        } else {
+          message.error("更新失败");
+        }
       }
       if (action === 'create') {
-        // TODO调用接口，创建用户
+        const data = await Api.createWifiData(submitData);
+        if (data.data === true) {
+          message.success("创建成功");
+        } else {
+          message.error("创建失败");
+        }
       }
       handleCancel();
       setVisible(false);
-      // props.update()
+      props.update()
     } catch (err) {
-      console.log(err);
+      message.error("操作失败");
     }
   };
 
   const handleCancel = () => {
     setVisible(false);
-    setImageUrl('');
     form.resetFields();
   };
 
-  const uploadButton = (
-    <button style={{ border: 0, background: 'none' }} type='button'>
-      {loading ? <LoadingOutlined /> : <PlusOutlined />}
-      <div style={{ marginTop: 8 }}>上传图片</div>
-    </button>
-  );
   return (
     <Modal
       width={800}
@@ -70,21 +75,21 @@ const CreateWifiModal = (props: IWifiProp) => {
     >
       <Form form={form} labelCol={{ span: 4 }} labelAlign='right'>
         {/* 这里放一个隐藏的字段，为了便于后续提交 */}
-        <Form.Item name='wifiId' hidden>
+        <Form.Item name='id' hidden>
           <Input />
         </Form.Item>
         <Form.Item
           name='name'
-          label='wifi名称'
+          label='描述'
           required
           rules={[
             {
               required: true,
-              message: '请输入wifi名'
+              message: '请输入wifi描述'
             }
           ]}
         >
-          <Input placeholder='请输入wifi名' />
+          <Input placeholder='请输入wifi描述' />
         </Form.Item>
         <Form.Item
           name='ssid'
@@ -93,11 +98,11 @@ const CreateWifiModal = (props: IWifiProp) => {
           rules={[
             {
               required: true,
-              message: '请输入ssid'
+              message: '请输入wifi名称'
             }
           ]}
         >
-          <Input placeholder='请输入ssid' />
+          <Input placeholder='请输入wifi名称' />
         </Form.Item>
         <Form.Item
           name='password'

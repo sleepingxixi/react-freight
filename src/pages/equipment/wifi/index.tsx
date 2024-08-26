@@ -21,12 +21,12 @@ const UserList = () => {
   const [selectIds, setSelectIds] = useState<number[]>([]);
   const columns: TableColumnsType<Equipment.Wifi> = [
     {
-      title: 'wifi名称',
+      title: '描述',
       dataIndex: 'name',
       key: 'name'
     },
     {
-      title: 'ssid',
+      title: 'wifi名称',
       dataIndex: 'ssid',
       key: 'ssid'
     },
@@ -89,7 +89,7 @@ const UserList = () => {
 
   const getWifiList = async () => {
     const data = await Api.getWifiListData();
-    setListData(data.list);
+    setListData(data.data);
   };
   const createUser = () => {
     userRef.current?.open('create');
@@ -105,17 +105,21 @@ const UserList = () => {
       content: `确认删除wifi【${data.name}】吗？`,
       okText: '确认',
       cancelText: '取消',
-      onOk: data => {
-        deleteUser(data);
+      onOk: close => {
+        Api.deleteWifiData([data.id!]).then(res => {
+          if (res.data) {
+            close();
+            // 更新数据
+            getWifiList();
+          } else {
+            message.error('操作失败');
+          }
+        }).catch(e => {
+          message.error('操作失败');
+        })
+
       }
     });
-  };
-
-  const deleteUser = (data: Equipment.Wifi) => {
-    // TODO 调用接口，删除用户
-    console.log('data==', data);
-    // 更新数据
-    getWifiList();
   };
 
   const batchDelete = () => {
@@ -125,19 +129,28 @@ const UserList = () => {
     modal.confirm({
       title: '批量删除提示',
       icon: <ExclamationCircleOutlined />,
-      content: `确认批量删除用户吗？`,
+      content: `确认批量删除wifi吗？`,
       okText: '确认',
       cancelText: '取消',
-      onOk: () => {
-        batchDeleteUser();
+      onOk: (close) => {
+        batchDeleteUser(close);
       }
     });
   };
 
-  const batchDeleteUser = () => {
-    // TODO 调用接口，批量删除用户
-    console.log('patchDeleteData==', selectIds);
-    // 更新数据
+  const batchDeleteUser = (close: any) => {
+    Api.deleteWifiData(selectIds).then(res => {
+      close();
+      if (res.data) {
+        close();
+        // 更新数据
+        getWifiList();
+      } else {
+        message.error('操作失败');
+      }
+    }).catch(e => {
+      message.error('操作失败');
+    })
     getWifiList();
     setSelectIds([]);
   };
@@ -162,7 +175,7 @@ const UserList = () => {
         </div>
         <Table
           // rowKey标识每一行的唯一标识
-          rowKey='userId'
+          rowKey='id'
           dataSource={listData}
           rowSelection={{
             type: 'checkbox',

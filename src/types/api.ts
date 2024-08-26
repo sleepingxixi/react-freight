@@ -155,15 +155,16 @@ export namespace Menu {
 export namespace Equipment {
 
   export interface Wifi {
+    id?: number,
     name: string;
     ssid: string;
     password: string;
-    createTime: string;
-    updateTime: string;
+    createTime?: string;
+    updateTime?: string;
   }
   export interface wifiListData {
-    page: pageParams;
-    list: Wifi[];
+    code: pageParams;
+    data: Wifi[];
   }
 
 }

@@ -75,23 +75,36 @@ export default {
     return delay(mockRequest, 1000);
   },
 
+  /** 获取wifi列表 */
   getWifiListData(): Promise<Equipment.wifiListData> {
-    const mockRequest = () => {
-      return {
-        page: {
-          pageNum: 1,
-          pageSize: 10,
-          total: 10
-        },
-        list: [{
-          name: '1',
-          ssid: '1',
-          password: '1',
-          createTime: '2023-11-22T10:44:25.532Z',
-        }]
-      };
-    };
-    return delay(mockRequest, 1000);
+    return request.get<Equipment.wifiListData>('/wifi/getWifiList');
+  },
+
+  /**
+   * 编辑wifi
+   * @param data
+   * @returns
+   */
+  createWifiData(data: Equipment.Wifi): Promise<{ code: number, data: boolean }> {
+    return request.post<{ code: number, data: boolean }>('/wifi/createWifi', data);
+  },
+
+  /**
+   * 编辑wifi
+   * @param data
+   * @returns
+   */
+  editWifiData(data: Equipment.Wifi): Promise<{ code: number, data: boolean }> {
+    return request.post<{ code: number, data: boolean }>('/wifi/editWifi', data);
+  },
+
+  /**
+   * 删除wifi
+   * @param data
+   * @returns
+   */
+  deleteWifiData(data: number[]): Promise<{ code: number, data: boolean }> {
+    return request.post<{ code: number, data: boolean }>('/wifi/deleteWifi', data);
   },
 
   getUserListData(params?: User.RequestUserListParams): Promise<User.UserListData> {

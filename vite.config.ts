@@ -16,6 +16,7 @@ export default defineConfig({
     port: 8080,
     proxy: {
       '/api/user': 'http://182.92.195.142:3000',
+      '/api/wifi': 'http://localhost:3000'
 
       // '/api/user': 'http://localhost:3000',
       // '/ws': {
