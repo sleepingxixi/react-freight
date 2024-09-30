@@ -1,3 +1,3 @@
 #!/bin/bash
-scp -r ./dist root@182.92.195.142:/usr/local/web/tmp/
+scp -r ./dist root@8.147.116.161:/usr/local/web/tmp/
 

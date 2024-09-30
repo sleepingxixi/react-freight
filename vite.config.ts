@@ -15,8 +15,10 @@ export default defineConfig({
     host: 'localhost',
     port: 8080,
     proxy: {
-      '/api/user': 'http://182.92.195.142:3000',
-      '/api/wifi': 'http://localhost:3000'
+      '/api/user': 'http://8.147.116.161:3000',
+      '/api/wifi': 'http://8.147.116.161:3000'
+      // '/api/user': 'http://127.0.0.1:3000',
+      // '/api/wifi': 'http://127.0.0.1:3000'
 
       // '/api/user': 'http://localhost:3000',
       // '/ws': {

@@ -1,4 +1,4 @@
-import * as echarts from 'echarts';
+// import * as echarts from 'echarts';
 const data = [
   { name: '哈尔滨', value: 2 },
   { name: '沈阳', value: 2 },
@@ -22,30 +22,30 @@ const data = [
   { name: '济南', value: 2 },
   { name: '上海', value: 2 },
 ];
-const geoCoordMap = {
-  哈尔滨: [126.63, 45.75],
-  沈阳: [123.432791, 41.808645],
-  秦皇岛: [119.57, 39.95],
-  天津: [117.210813, 39.14393],
-  北京: [116.46, 39.92],
-  保定: [115.48, 38.85],
-  西安: [108.953098, 34.2778],
-  临汾: [111.538788, 36.099745],
-  乌兰察布: [113.112846, 41.022363],
-  重庆: [106.54, 29.59],
-  成都: [104.06, 30.67],
-  武汉: [114.31, 30.52],
-  南京: [118.78, 32.04],
-  杭州: [120.219375, 30.259244],
-  佛山: [113.134026, 23.035095],
-  南宁: [108.297234, 22.806493],
-  柳州: [109.4, 24.33],
-  桂林: [110.28, 25.29],
-  郑州: [113.65, 34.76],
-  济南: [117.024967, 36.682785],
-  上海: [121.48, 31.22]
+const geoCoordMap: Record<string, [number, number]> = {
+  '哈尔滨': [126.63, 45.75],
+  '沈阳': [123.432791, 41.808645],
+  '秦皇岛': [119.57, 39.95],
+  '天津': [117.210813, 39.14393],
+  '北京': [116.46, 39.92],
+  '保定': [115.48, 38.85],
+  '西安': [108.953098, 34.2778],
+  '临汾': [111.538788, 36.099745],
+  '乌兰察布': [113.112846, 41.022363],
+  '重庆': [106.54, 29.59],
+  '成都': [104.06, 30.67],
+  '武汉': [114.31, 30.52],
+  '南京': [118.78, 32.04],
+  '杭州': [120.219375, 30.259244],
+  '佛山': [113.134026, 23.035095],
+  '南宁': [108.297234, 22.806493],
+  '柳州': [109.4, 24.33],
+  '桂林': [110.28, 25.29],
+  '郑州': [113.65, 34.76],
+  '济南': [117.024967, 36.682785],
+  '上海': [121.48, 31.22]
 };
-const convertData = function (data) {
+const convertData = function (data: { name: string; value: number; }[]) {
   const res = [];
   for (let i = 0; i < data.length; i++) {
     const geoCoord = geoCoordMap[data[i].name];
@@ -58,44 +58,52 @@ const convertData = function (data) {
   }
   return res;
 };
-function renderItem(params, api) {
-  const coords = [
-    [116.7, 39.53],
-    [103.73, 36.03],
-    [112.91, 27.87],
-    [120.65, 28.01],
-    [119.57, 39.95]
-  ];
-  const points = [];
-  for (let i = 0; i < coords.length; i++) {
-    points.push(api.coord(coords[i]));
-  }
-  const color = api.visual('color');
-  return {
-    type: 'polygon',
-    shape: {
-      points: echarts.graphic.clipPointsByRect(points, {
-        x: params.coordSys.x,
-        y: params.coordSys.y,
-        width: params.coordSys.width,
-        height: params.coordSys.height
-      })
-    },
-    style: api.style({
-      fill: color,
-      stroke: echarts.color.lift(color)
-    })
-  };
-}
+// function renderItem(params, api) {
+//   const coords = [
+//     [116.7, 39.53],
+//     [103.73, 36.03],
+//     [112.91, 27.87],
+//     [120.65, 28.01],
+//     [119.57, 39.95]
+//   ];
+//   const points = [];
+//   for (let i = 0; i < coords.length; i++) {
+//     points.push(api.coord(coords[i]));
+//   }
+//   const color = api.visual('color');
+//   return {
+//     type: 'polygon',
+//     shape: {
+//       points: echarts.graphic.clipPointsByRect(points, {
+//         x: params.coordSys.x,
+//         y: params.coordSys.y,
+//         width: params.coordSys.width,
+//         height: params.coordSys.height
+//       })
+//     },
+//     style: api.style({
+//       fill: color,
+//       stroke: echarts.color.lift(color)
+//     })
+//   };
+// }
 
 export function loadBMap(ak: string) {
   return new Promise(function (resolve, reject) {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     if (typeof BMap !== 'undefined') {
       console.log("here")
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-expect-error
       resolve(BMap)
       return true
     }
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     window.onBMapCallback = function () {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-expect-error
       resolve(BMap)
     }
     const script = document.createElement('script')
@@ -104,7 +112,7 @@ export function loadBMap(ak: string) {
     script.onerror = reject
     document.head.appendChild(script)
   })
-};
+}
 export const option = {
   backgroundColor: 'transparent',
   title: {
@@ -264,7 +272,7 @@ export const option = {
       encode: {
         value: 2
       },
-      symbolSize: function (val) {
+      symbolSize: function () {
         return 10;
       },
       label: {
@@ -294,7 +302,7 @@ export const option = {
       encode: {
         value: 2
       },
-      symbolSize: function (val) {
+      symbolSize: function () {
         return 10;
       },
       showEffectOn: 'emphasis',
